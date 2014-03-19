@@ -1,0 +1,13 @@
+@(products: List[models.Product])
+
+
+
+@webshop.index("List of Products"){
+	Here is a list of all products (@products.size() products in total):<br>
+
+	<ul>
+		@for(product <- products){
+			<li><a href="/product/@product.getId()">@product.getName()</a></li>
+		}
+	</ul>
+}

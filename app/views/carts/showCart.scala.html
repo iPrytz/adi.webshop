@@ -1,0 +1,14 @@
+@(products: List[models.Product], user: models.User)
+
+
+
+
+@webshop.index("List of Products in cart for user"){
+	Here is a list of all products (@products.size() products in total) for user @user.getFirstname() @user.getSurname<br>
+
+	<ul>
+		@for(product <- products){
+			<li><a href="/product/@product.getId()">@product.getName()</a></li>
+		}
+	</ul>
+}

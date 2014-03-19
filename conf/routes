@@ -1,0 +1,22 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.WebshopCont.webshop()
+#GET     /                           controllers.ProductCont.showProducts()
+#GET     /admin                      controllers.WebshopCont.webshop()
+#GET     /admin/products/edit        controllers.ProductCont.editProducts()
+#GET     /admin/categories/edit      controllers.CategoryCont.editCategories()
+GET     /skapa-data                   controllers.WebshopCont.skapaFejkDataMetod()
+GET     /products                   controllers.ProductCont.showProducts()
+GET     /product/:id               controllers.ProductCont.showProduct(id:Int)
+GET     /orders                     controllers.OrderCont.showOrders()
+GET     /order/:id                 controllers.OrderCont.showOrder(id:Int)
+GET     /categories                 controllers.CategoryCont.showCategories()
+GET     /category/:category       controllers.ProductCont.showProductsInCategory(category)
+GET     /carts                      controllers.CartCont.showCarts()
+GET     /cart/:id                      controllers.CartCont.showCart(id:Int)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)

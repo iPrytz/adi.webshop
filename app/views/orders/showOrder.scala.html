@@ -1,0 +1,11 @@
+@(order: models.Order)
+
+
+
+@webshop.index("Product info"){
+Product <br>
+ID: @order.getId() <br>
+Date: @order.getDate() <br>
+Price: @order.getCost() <br>
+ 
+}

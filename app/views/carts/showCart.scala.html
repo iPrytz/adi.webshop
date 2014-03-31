@@ -1,14 +1,15 @@
-@(products: List[models.Product], user: models.User)
+@(user: models.User)
 
 
-
-
-@webshop.index("List of Products in cart for user"){
-	Here is a list of all products (@products.size() products in total) for user @user.getFirstname() @user.getSurname<br>
-
-	<ul>
-		@for(product <- products){
-			<li><a href="/product/@product.getId()">@product.getName()</a></li>
-		}
-	</ul>
+@if(user.getProductsInCart.size() == 1){
+@webshop.index("Your Cart", "You have " + user.getProductsInCart.size() + " product in your cart"){
+@for(product <- user.getProductsInCart){
+<pre data-line="@product.getId"><span class="line">@product.getId</span><span class="code"><a href="/product/@product.getProduct().getId()">@product.getProduct().getName()</a></span></pre> 	
+}}
+}
+@if(user.getProductsInCart.size() != 1) {
+@webshop.index("Your Cart", "You have " + user.getProductsInCart.size() + " products in your cart"){
+@for(product <- user.getProductsInCart){
+<pre data-line="@product.getId"><span class="line">@product.getId</span><span class="code"><a href="/product/@product.getProduct().getId()">@product.getProduct().getName()</a></span></pre> 	
+}}	
 }

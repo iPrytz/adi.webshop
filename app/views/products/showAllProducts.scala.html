@@ -2,12 +2,10 @@
 
 
 
-@webshop.index("List of Products"){
-	Here is a list of all products (@products.size() products in total):<br>
+@webshop.index("List of Products", products.size() + " products found"){
+	
+@for(product <- products){
+<pre data-line="@product.getId"><span class="line">@product.getId</span><span class="code"><a href="/product/@product.getId()">@product.getName()</a><a href="/add-to-cart/@product.getId()"><span class="right-button glyphicon glyphicon-shopping-cart"></span></a></span></pre> 	
 
-	<ul>
-		@for(product <- products){
-			<li><a href="/product/@product.getId()">@product.getName()</a></li>
-		}
-	</ul>
+}
 }

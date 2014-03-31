@@ -1,0 +1,39 @@
+@(param: Any)
+
+@webshop.admin("Add Product"){
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="@routes.ProductCont.addProducts">Add product</a></li>
+  <li><a href="@routes.CategoryCont.addCategories">Add Category</a></li>
+  <li><a href="@routes.ProductCont.delProducts">Delete product</a></li>
+  <li><a href="@routes.CategoryCont.delCategories">Delete Category</a></li>
+</ul>
+
+@if(flash.containsKey("product")){
+	<div class="alert alert-success">@flash.get("product") added!</div>
+}
+
+<div id="login-form" class="center-block">
+<form class="form-horizontal" role="form" action="@routes.ProductCont.addProduct()" method="POST" >
+  <div class="form-group admin-form-1">
+    <label class="sr-only">New Product</label>
+    <input type="text" class="form-control" name="name" placeholder="Product name">
+  </div>
+  <div class="form-group admin-form-1">
+    <label class="sr-only">Price</label>
+    <input type="text" class="form-control" name="price" placeholder="Product Price">
+  </div>
+  <div class="form-group admin-form-1">
+    <label class="sr-only">RRP</label>
+    <input type="text" class="form-control" name="rrp" placeholder="Product RRP">
+  </div>
+  <div class="form-group admin-form-1">
+    <label class="sr-only">Description</label>
+    <textarea type="text" class="form-control" name="desc" placeholder="Description"></textarea>
+  </div>
+ 
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
+
+</div>
+}

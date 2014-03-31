@@ -1,0 +1,20 @@
+@(products: List[models.Product])
+
+
+@webshop.admin("Delete Product"){
+
+<ul class="nav nav-tabs">
+  <li><a href="@routes.ProductCont.addProducts">Add product</a></li>
+  <li><a href="@routes.CategoryCont.addCategories">Add Category</a></li>
+  <li class="active"><a href="@routes.ProductCont.delProducts">Delete product</a></li>
+  <li><a href="@routes.CategoryCont.delCategories">Delete Category</a></li>
+</ul>
+
+
+@for(product <- products){
+<pre data-line="@product.getId"><span class="line">@product.getId</span><span class="code"><a href="/product/@product.getId()">@product.getName()</a><a href="@routes.ProductCont.delProduct(product.getId())"><span class="right-button glyphicon glyphicon-trash"></span></a></span></pre> 	
+
+}
+
+
+}

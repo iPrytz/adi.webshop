@@ -1,2 +1,19 @@
-@* readProductsInCategory Template File *@
-@(param: Any)
+@(category: models.Category)
+
+
+@if(category.getProducts.size == 1){
+@webshop.index("Category: " + category.getName, category.getProducts.size + " product in category " + category.getName){
+@for(product <- category.getProducts){
+<pre data-line="@product.getId"><span class="line">@product.getId</span><span class="code"><a href="/product/@product.getId()">@product.getName()</a></span></pre> 	
+}
+}
+}
+@if(category.getProducts.size != 1) {
+@webshop.index("Category: " + category.getName, category.getProducts.size + " products in category " + category.getName){
+@for(product <- category.getProducts){
+<pre data-line="@product.getId"><span class="line">@product.getId</span><span class="code"><a href="/product/@product.getId()">@product.getName()</a></span></pre> 	
+}
+}
+	
+}
+

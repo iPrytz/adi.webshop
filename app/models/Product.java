@@ -2,16 +2,39 @@ package models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn; 
 
+@Entity
 public final class Product {
-
+	@Id
+	@GeneratedValue
 	private final int id;
 	private final String name;
 	private final String description;
 	private final double cost;
 	private final double RRP;
-	private final List<String> categories;
+	@ManyToMany
+	@JoinTable(name="category_product",
+    joinColumns = @JoinColumn(name = "products_id"),
+    inverseJoinColumns = @JoinColumn(name = "category_id")
+)
+	private final List<Category> categories;
 
+	
+	Product() {
+		this.id = 0;
+		this.name = "";
+		this.description = null;
+		this.cost = 0;
+		this.RRP = 0;
+		this.categories = null;
+	}
 	public Product(int id, String name, double cost, double RRP) {
 		this.id = id;
 		this.name = name;
@@ -20,9 +43,17 @@ public final class Product {
 		this.RRP = RRP;
 		this.categories = null;
 	}
+	public Product(String name, String desc, double cost, double RRP) {
+		this.id = 0;
+		this.name = name;
+		this.description = desc;
+		this.cost = cost;
+		this.RRP = RRP;
+		this.categories = null;
+	}
 
 	public Product(int id, String name, String description, double cost,
-			double RRP, List<String> categories) {
+			double RRP, List<Category> categories) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -32,7 +63,7 @@ public final class Product {
 	}
 
 	public Product(String name, String description, double cost, double RRP,
-			List<String> categories) {
+			List<Category> categories) {
 		this.id = 0;
 		this.name = name;
 		this.description = description;
@@ -68,8 +99,7 @@ public final class Product {
 	public double getCost() {
 		return cost;
 	}
-
-	public List<String> getCategories() {
+	public List<Category> getCategories() {
 		return categories;
 	}
 }

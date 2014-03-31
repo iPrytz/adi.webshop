@@ -1,32 +1,57 @@
-@(title: String)(content: Html)
+@(title: String, info: String)(content: Html)
 
 <!DOCTYPE html>
 <html><head>
 	<meta charset="utf-8">
 	<title>@title</title>
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-</head><body>
+	<script src='@routes.Assets.at("bootstrap/js/bootstrap.min.js")'></script>
+	<link rel="stylesheet" type="text/css" href='@routes.Assets.at("bootstrap/css/bootstrap.min.css")' />
+	<link rel="stylesheet" type="text/css" href='@routes.Assets.at("bootstrap/css/bootstrap-theme.min.css")' />
+	<link rel="stylesheet" type="text/css" href='@routes.Assets.at("stylesheets/main.css")' />
+</head>
 	
-	<h1>@title</h1>
-	
-<a href="http://localhost:9000/products">Products</a>
-<a href="http://localhost:9000/categories">Categories</a>
-<a href="http://localhost:9000/carts">Carts</a>
-<a href="http://localhost:9000/orders">Orders</a>
-	<br><br>
-	
-	
-	@content
-	
-	
+	<body id="play-error-page">
+		<a href="@routes.WebshopCont.webshop"><h1>@title</h1></a>
+
+		<p id="detail">
+
+<a href="@routes.ProductCont.showProducts">Products</a>
+<a href="@routes.CategoryCont.showCategories">Categories</a>
+<a href="@routes.CartCont.showCarts">Cart</a>
+<a href="@routes.OrderCont.showOrders">Order</a>
+
+@if(session().get("username") != null){
+	<span class="pull-right">@session().get("username") </span> 
+}
+
+
+		</p>
+		<h2>@info</h2> 
+
+ <div id="source-code">
+    					
+					
+@content
+
+    								
+</div>
+
+				
+
+@if(session().get("username") == null){
+<form action="@routes.UserCont.showLoginForm">
+<button type="submit" class="btn btn-default butlogin">LOGIN</button>   
+</form>				
+}else{
+<form action="@routes.UserCont.logout">
+<button type="submit" class="btn btn-default butlogin">LOGOUT</button>
+</form> 				 				 
+}
+
+<span class="admin pull-right" ><a href="@routes.WebshopCont.admin"><span class="glyphicon glyphicon-wrench"></span></a></span> 
 </body></html>
-
-<h1></h1>
-
-
+	
 
 
 

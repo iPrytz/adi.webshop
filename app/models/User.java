@@ -1,9 +1,20 @@
 package models;
 
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 
+@Entity
 public final class User {
+	@Id
+	@GeneratedValue
 	private final int id;
+	@Column(unique=true)
 	private final String email;
 	private final String password;
 	private final String firstname;
@@ -12,7 +23,23 @@ public final class User {
 	private final String postcode;
 	private final String town;
 	private final String phonenumber;
+	@OneToMany(mappedBy="user")
+	private List<ProductsInCart> productsInCart;
+	@OneToMany
+	private List<Order> orders;
 
+	public User() {
+		this.id = 0;
+		this.email = null;
+		this.password = null;
+		this.firstname = null;
+		this.surname = null;
+		this.streetAddress = null;
+		this.postcode = null;
+		this.town = null;
+		this.phonenumber = null;
+	}
+	
 	public User(String email, String password, String firstname,
 			String surname, String streetAddress, String postcode, String town,
 			String phonenumber) {
@@ -88,6 +115,10 @@ public final class User {
 
 	public String getPhonenumber() {
 		return phonenumber;
+	}
+	
+	public List<ProductsInCart> getProductsInCart(){
+		return productsInCart;
 	}
 
 	public String toString() {

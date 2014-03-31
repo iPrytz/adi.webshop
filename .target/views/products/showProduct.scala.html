@@ -1,10 +1,19 @@
 @(product : models.Product)
 
 
-@webshop.index("Product info"){
-Product <br>
-ID: @product.getId() <br>
-Name: @product.getName() <br>
-Price: @product.getRRP() <br>
+@webshop.index("Product", product.getName){
+<pre data-line="@product.getId"><span class="infoTag">ID</span><span class="info"> @product.getId() <br></span></pre> 	
+<pre data-line="@product.getId"><span class="infoTag">Price</span><span class="info"> @product.getRRP() <br></span></pre> 	
+<span class="desc"> @product.getDescription() <br></span>
+
+
  
-}
+ 
+ <br>
+<h2> Categories: </h2>
+ @for(category <- product.getCategories()){
+ 	
+<pre data-line="@category.getId"><span class="line">@category.getId</span><span class="code"><a href ="@routes.CategoryCont.showCategories/@category.getName()"> @category.getName()</a></span></pre> 	
+
+ }}
+	

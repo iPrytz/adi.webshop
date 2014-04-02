@@ -5,15 +5,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 
 @Entity
+@Table(name="orders")
 public class Order {
-	
 	@Id
 	@GeneratedValue
 	private final int id;
@@ -22,8 +25,8 @@ public class Order {
 	Date date = null;
 	private final double cost;
 	private final double profit;
-	@OneToMany(mappedBy="order")
-	private final List<ProductsInOrder> products;
+	@OneToMany(mappedBy="order", cascade= CascadeType.ALL)
+	private List<ProductsInOrder> products;
 
 	public Order() {
 		this.id = 0;
@@ -37,6 +40,15 @@ public class Order {
 	public Order(int id, User user, String date, double cost, double profit,
 			List<ProductsInOrder> products) {
 		this.id = id;
+		this.user = user;
+		convertToDate(date);
+		this.cost = cost;
+		this.profit = profit;
+		this.products = products;
+	}
+	public Order(User user, String date, double cost, double profit,
+			List<ProductsInOrder> products) {
+		this.id = 0;
 		this.user = user;
 		convertToDate(date);
 		this.cost = cost;
@@ -66,6 +78,9 @@ public class Order {
 
 	public List<ProductsInOrder> getProducts() {
 		return products;
+	}
+	public void setProducts(List<ProductsInOrder> products) {
+		this.products = products;
 	}
 
 	private void convertToDate(String stringDate) {

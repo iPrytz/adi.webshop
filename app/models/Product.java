@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.JoinColumn; 
+import javax.persistence.OneToMany;
 
 @Entity
 public final class Product {
@@ -22,9 +23,10 @@ public final class Product {
 	@ManyToMany
 	@JoinTable(name="category_product",
     joinColumns = @JoinColumn(name = "products_id"),
-    inverseJoinColumns = @JoinColumn(name = "category_id")
-)
-	private final List<Category> categories;
+    inverseJoinColumns = @JoinColumn(name = "category_id"))
+	private List<Category> categories;
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	private List<ProductsInCart> productsInCart;
 
 	
 	Product() {
@@ -34,6 +36,7 @@ public final class Product {
 		this.cost = 0;
 		this.RRP = 0;
 		this.categories = null;
+		this.productsInCart = null;
 	}
 	public Product(int id, String name, double cost, double RRP) {
 		this.id = id;
@@ -42,6 +45,7 @@ public final class Product {
 		this.cost = cost;
 		this.RRP = RRP;
 		this.categories = null;
+		this.productsInCart = null;
 	}
 	public Product(String name, String desc, double cost, double RRP) {
 		this.id = 0;
@@ -50,6 +54,7 @@ public final class Product {
 		this.cost = cost;
 		this.RRP = RRP;
 		this.categories = null;
+		this.productsInCart = null;
 	}
 
 	public Product(int id, String name, String description, double cost,
@@ -60,6 +65,7 @@ public final class Product {
 		this.cost = cost;
 		this.RRP = RRP;
 		this.categories = categories;
+		this.productsInCart = null;
 	}
 
 	public Product(String name, String description, double cost, double RRP,
@@ -70,6 +76,7 @@ public final class Product {
 		this.cost = cost;
 		this.RRP = RRP;
 		this.categories = categories;
+		this.productsInCart = null;
 	}
 
 	@Override

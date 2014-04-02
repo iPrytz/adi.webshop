@@ -3,12 +3,8 @@ package controllers;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.TypedQuery;
-
-import org.hibernate.Query;
 
 import models.Category;
-import models.User;
 import play.db.jpa.JPA;
 import play.db.jpa.Transactional;
 import play.mvc.Controller;

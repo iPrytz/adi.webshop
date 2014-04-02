@@ -1,7 +1,6 @@
 package controllers;
 
 
-import play.cache.Cache;
 import play.db.jpa.Transactional;
 import play.mvc.Security;
 import play.mvc.Controller;
@@ -26,7 +25,7 @@ public class WebshopCont extends Controller {
 //    	setSessoionUUID();
 //    	};
     	
-        return  ok(index.render("The Exception Webshop.", "Welcome!", null));
+        return  ok(index.render("Expected Webshop with no Exception", "Welcome!", null));
     }
     @Security.Authenticated(MyAuthenticator.class)
     public static Result admin(){

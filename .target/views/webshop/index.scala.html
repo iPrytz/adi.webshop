@@ -9,8 +9,10 @@
 	<link rel="stylesheet" type="text/css" href='@routes.Assets.at("bootstrap/css/bootstrap.min.css")' />
 	<link rel="stylesheet" type="text/css" href='@routes.Assets.at("bootstrap/css/bootstrap-theme.min.css")' />
 	<link rel="stylesheet" type="text/css" href='@routes.Assets.at("stylesheets/main.css")' />
+	<script type="text/javascript" src="@routes.Assets.at("js/main.js")"></script>
 </head>
-	
+<div id="wrap">	
+
 	<body id="play-error-page">
 		<a href="@routes.WebshopCont.webshop"><h1>@title</h1></a>
 
@@ -49,8 +51,17 @@
 </form> 				 				 
 }
 
-<span class="admin pull-right" ><a href="@routes.WebshopCont.admin"><span class="glyphicon glyphicon-wrench"></span></a></span> 
-</body></html>
+</div>
+<div id="push">
+</div>
+<div id="footer">
+
+<span class="admin pull-right " ><a href="@routes.WebshopCont.admin"><span class="glyphicon glyphicon-wrench"></span></a></span> 
+</div>
+</body>
+
+</html>
+	
 	
 
 

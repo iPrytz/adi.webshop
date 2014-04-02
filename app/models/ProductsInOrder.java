@@ -23,10 +23,31 @@ public class ProductsInOrder {
 		this.product = null;
 	}
 	
-	public ProductsInOrder(int id, Order order, int quantity, Product product) {
-		this.id = id;
+	public ProductsInOrder(Order order, int quantity, Product product) {
+		this.id = 0;
 		this.order = order;
 		this.quantity = quantity;
 		this.product = product;
+	}
+	
+
+	public int getId() {
+		return id;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 }

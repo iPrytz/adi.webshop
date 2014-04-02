@@ -25,7 +25,7 @@ public final class User {
 	private final String phonenumber;
 	@OneToMany(mappedBy="user")
 	private List<ProductsInCart> productsInCart;
-	@OneToMany
+	@OneToMany(mappedBy="user")
 	private List<Order> orders;
 
 	public User() {
@@ -38,6 +38,8 @@ public final class User {
 		this.postcode = null;
 		this.town = null;
 		this.phonenumber = null;
+		this.productsInCart = null;
+		this.orders = null;
 	}
 	
 	public User(String email, String password, String firstname,
@@ -52,24 +54,13 @@ public final class User {
 		this.postcode = postcode;
 		this.town = town;
 		this.phonenumber = phonenumber;
+		this.orders = null;
 	}
 
-	public User(String email, String password, String firstname,
-			String surname, String streetAddress, String postcode, String town) {
-		this.id = 0;
-		this.email = email;
-		this.password = password;
-		this.firstname = firstname;
-		this.surname = surname;
-		this.streetAddress = streetAddress;
-		this.postcode = postcode;
-		this.town = town;
-		this.phonenumber = null;
-	}
 
 	public User(int id, String email, String password, String firstname,
 			String surname, String streetAddress, String postcode, String town,
-			String phonenumber) {
+			String phonenumber, List<Order> order) {
 		this.id = id;
 		this.email = email;
 		this.password = password;
@@ -79,6 +70,7 @@ public final class User {
 		this.postcode = postcode;
 		this.town = town;
 		this.phonenumber = phonenumber;
+		this.orders = order;
 	}
 
 	public int getId() {
@@ -119,6 +111,17 @@ public final class User {
 	
 	public List<ProductsInCart> getProductsInCart(){
 		return productsInCart;
+	}
+	public void setProductsInCart(List<ProductsInCart> productsInCart){
+		this.productsInCart = productsInCart;
+	}
+
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
 	}
 
 	public String toString() {

@@ -2,8 +2,8 @@
 
 
 @webshop.index("Product", product.getName){
-<pre data-line="@product.getId"><span class="infoTag">ID</span><span class="info"> @product.getId() <br></span></pre> 	
-<pre data-line="@product.getId"><span class="infoTag">Price</span><span class="info"> @product.getRRP() <br></span></pre> 	
+<pre data-line="@product.getId"><span class="infoTag">ID</span><span class="info">@product.getId() <br></span></pre> 	
+<pre data-line="@product.getId"><span class="infoTag">Price</span><span class="info">@product.getRRP() <br></span></pre> 	
 <span class="desc"> @product.getDescription() <br></span>
 
 
@@ -13,7 +13,18 @@
 <h2> Categories: </h2>
  @for(category <- product.getCategories()){
  	
-<pre data-line="@category.getId"><span class="line">@category.getId</span><span class="code"><a href ="@routes.CategoryCont.showCategories/@category.getName()"> @category.getName()</a></span></pre> 	
+<pre data-line="@category.getId"><span class="line">@category.getId</span><span class="code"><a href ="@routes.CategoryCont.showCategories/@category.getName()">@category.getName()</a></span></pre> 	
 
- }}
-	
+ }
+
+<form id='myform' method='POST' action='@routes.CartCont.addToCart(product.getId())'>
+    <input type='button' value='-' class='qtyminus' field='quantity' />
+    <input type='text' name='quantity' value='1' min-value='1' class='qty' />
+    <input type='button' value='+' class='qtyplus' field='quantity' />
+    <a href="#" onclick="$(this).closest('form').submit()"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+    
+</form>
+      
+      
+      
+      }

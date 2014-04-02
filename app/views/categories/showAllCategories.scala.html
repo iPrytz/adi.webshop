@@ -5,6 +5,6 @@
 @webshop.index("Categories", categories.size() + " categories found"){
  @for(category <- categories){
  	
-<pre data-line="@category.getId"><span class="line">@category.getId</span><span class="code"><a href ="@routes.CategoryCont.showCategories/@category.getName()"> @category.getName()</a></span></pre> 	
+<pre data-line="@category.getId"><span class="line">@category.getId</span><span class="code"><a href ="@routes.CategoryCont.showCategories/@category.getName()">@category.getName()</a></span></pre> 	
 
  }}

@@ -11,7 +11,7 @@ INSERT INTO product (name, description, cost, rrp) VALUES ('Notebook', 'Write do
 INSERT INTO product (name, description, cost, rrp) VALUES ('Car', 'Great car suited for a business man', 10000, 500000);
 
 INSERT INTO user (email,password,firstname,surname,streetAddress,postcode,town,phonenumber) VALUES ("admin@admin","admin","admin","","","","","");
-INSERT INTO user (email,password,firstname,surname,streetAddress,postcode,town,phonenumber) VALUES ("Duis.cursus@elit.com","ante","Jillian","Brady","383-8726 Tempor Avenue","08628-727","Perwez","1-385-461-6140");
+INSERT INTO user (email,password,firstname,surname,streetAddress,postcode,town,phonenumber) VALUES ("sven@mail.se","sven","Sven","Janson","383-8726 Tempor Avenue","08628-727","Perwez","1-385-461-6140");
 INSERT INTO user (email,password,firstname,surname,streetAddress,postcode,town,phonenumber) VALUES ("dictum.placerat.augue@nullaatsem.org","Duis","Gabriel","Herrera","623-5456 Fermentum Rd.","1627HP","Lauregno/Laurein","1-558-565-9706");
 INSERT INTO user (email,password,firstname,surname,streetAddress,postcode,town,phonenumber) VALUES ("eget.volutpat@urnaNunc.com","nisl.","Fiona","Wilson","396-4191 Parturient Street","C3B 8W6","CÃ¡diz","1-718-813-7921");
 INSERT INTO user (email,password,firstname,surname,streetAddress,postcode,town,phonenumber) VALUES ("Phasellus@vulputateposuere.co.uk","erat","Jason","Dominguez","P.O. Box 808, 9853 Interdum Avenue","WQ2O 7SS","Merthyr Tydfil","1-853-740-5031");
@@ -140,9 +140,12 @@ INSERT INTO category_product (products_id, category_id) VALUES (8, 3);
 INSERT INTO category_product (products_id, category_id) VALUES (9, 2);
 INSERT INTO category_product (products_id, category_id) VALUES (10, 1);
 
-INSERT INTO ProductsInCart (user_id, product_id, quantity) VALUES (1, 2, 10);
-INSERT INTO ProductsInCart (user_id, product_id, quantity) VALUES (1, 3, 10);
-INSERT INTO ProductsInCart (user_id, product_id, quantity) VALUES (1, 4, 10);
+INSERT INTO ProductsInCart (user_id, product_id, quantity) VALUES (1, 2, 2);
+INSERT INTO ProductsInCart (user_id, product_id, quantity) VALUES (1, 3, 1);
+INSERT INTO ProductsInCart (user_id, product_id, quantity) VALUES (1, 4, 5);
+INSERT INTO ProductsInCart (user_id, product_id, quantity) VALUES (2, 5, 2);
+INSERT INTO ProductsInCart (user_id, product_id, quantity) VALUES (2, 3, 3);
+INSERT INTO ProductsInCart (user_id, product_id, quantity) VALUES (2, 6, 1);
 INSERT INTO ProductsInCart (user_id, product_id, quantity) VALUES (5, 3, 10);
 INSERT INTO ProductsInCart (user_id, product_id, quantity) VALUES (20, 7, 2);
 INSERT INTO ProductsInCart (user_id, product_id, quantity) VALUES (20, 8, 10);

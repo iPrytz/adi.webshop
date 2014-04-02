@@ -1,29 +1,34 @@
 package controllers;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.TypedQuery;
 
+import models.Order;
 import models.Product;
 import models.ProductsInCart;
-import models.TempCart;
+import models.ProductsInOrder;
 import models.User;
 import play.db.jpa.JPA;
 import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.carts.*;
+import views.html.orders.showOrder;
 
 public class CartCont extends Controller {
 
 	@Transactional
 	public static Result showCarts() {
-		User user = getUserFromSession();
-		
-		if(user==null){
+		User user = UserCont.getUserFromSession();
+
+		if (user == null) {
 			return redirect(routes.UserCont.showLoginForm());
 		}
-		
+
 		return ok(showCart.render(user));
 	}
 
@@ -37,43 +42,101 @@ public class CartCont extends Controller {
 
 		return ok(showCart.render(user));
 	}
+
 	@Transactional
-	public static Result addToCart(int prodId){
-		User user = getUserFromSession();
-		
-		
-		if (user != null){	
-			Product prod = JPA.em().find(Product.class, prodId);
-			ProductsInCart prodInCart = new ProductsInCart(user, 1, prod);
-			JPA.em().persist(prodInCart);
-		} else{
+	public static Result addToCart(int prodId) {
+		User user = UserCont.getUserFromSession();
+		Map<String, String[]> form = request().body().asFormUrlEncoded();
+		Product prod = JPA.em().find(Product.class, prodId);
+		int quantity;
+
+		if (form != null) {
+			String qty = form.get("quantity")[0];
+			quantity = Integer.parseInt(qty);
+		} else {
+			quantity = 1;
+		}
+
+		if (user != null) {
+
+			TypedQuery<ProductsInCart> query = JPA
+					.em()
+					.createQuery(
+							"SELECT c FROM ProductsInCart c WHERE c.product = :prod AND c.user = :user",
+							ProductsInCart.class);
+			query.setParameter("prod", prod);
+			query.setParameter("user", user);
+			List<ProductsInCart> productsInCartList = query.getResultList();
+
+			if (productsInCartList.size() != 0) {
+				ProductsInCart productInCart = productsInCartList.get(0);
+
+				if (form != null) {
+					productInCart.setQuantity(quantity);
+					flash().put("updated", productInCart.getProduct().getName());
+				} else {
+					productInCart.setQuantity(quantity
+							+ productInCart.getQuantity());
+					flash().put("updated", productInCart.getProduct().getName());
+				}
+			} else {
+
+				ProductsInCart prodInCart = new ProductsInCart(user, quantity,
+						prod);
+
+				JPA.em().persist(prodInCart);
+			}
+
+		} else {
 			return redirect(routes.UserCont.showLoginForm());
 		}
-		
 
 		return ok(showCart.render(user));
 	}
 
 	@Transactional
-	private static List<Product> getAllProductsFromDb() {
-		return null; 
+	public static Result rmvFrCart(int prodId) {
+		User user = UserCont.getUserFromSession();
+
+		if (user != null) {
+			Product prod = JPA.em().find(Product.class, prodId);
+			 List<ProductsInCart> prodInCart = user.getProductsInCart();
+			if (prodInCart != null) {
+				for (ProductsInCart cartRecord : prodInCart) {
+					if (cartRecord.getProduct().getId() == prod.getId()) {
+						JPA.em().remove(cartRecord);
+					}
+				}
+			}
+		} else {
+			return redirect(routes.UserCont.showLoginForm());
+		}
+		return redirect(routes.CartCont.showCarts());
+	}
+
+	@Transactional
+	public static Result placeOrder(){
+		User user = UserCont.getUserFromSession();
+		
+		List<ProductsInCart> userProductsInCart = user.getProductsInCart();
+		List<ProductsInOrder> userProductsInOrder = new ArrayList<ProductsInOrder>();
+		Date date = new Date(System.currentTimeMillis());	
+		Order order = new Order(user, date.toString(), 1000, 1000, userProductsInOrder);
+		
+		for (ProductsInCart productsInCart : userProductsInCart) {
+		userProductsInOrder.add(new ProductsInOrder(order, productsInCart.getQuantity(), productsInCart.getProduct()));	
+		JPA.em().remove(productsInCart);
+		}
+		order.setProducts(userProductsInOrder);
+		JPA.em().persist(order);
+		
+		return ok(showOrder.render(order));
 	}
 
 	@Transactional
 	private static User getUserFromDb(int userId) {
 		return JPA.em().find(User.class, userId);
 	}
-	@Transactional
-	private static User getUserFromSession() {
-		
-		TypedQuery<User> query = JPA.em().createQuery( "SELECT c FROM User c WHERE c.email = :email", User.class);
-		query.setParameter("email", session().get("username"));
-		
-		List<User> activeUser = query.getResultList();
-		
-		if(activeUser.size() == 0){
-			return null;
-		}else{
-		return activeUser.get(0);
-	}}
+
+	
 }

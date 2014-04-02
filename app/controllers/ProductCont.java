@@ -3,14 +3,12 @@ package controllers;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.Query;
 
 import play.db.jpa.JPA;
 import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-import views.html.categories.addCategories;
 import views.html.products.*;
 import models.*;
 

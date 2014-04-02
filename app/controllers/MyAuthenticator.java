@@ -1,9 +1,7 @@
 package controllers;
-import models.User;
-import play.mvc.Controller;
+
 import play.mvc.Http.Context;
 import play.mvc.Result;
-import views.html.webshop.admin;
 
 
 public class MyAuthenticator extends play.mvc.Security.Authenticator{

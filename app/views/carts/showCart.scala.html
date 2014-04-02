@@ -1,15 +1,22 @@
 @(user: models.User)
 
 
-@if(user.getProductsInCart.size() == 1){
-@webshop.index("Your Cart", "You have " + user.getProductsInCart.size() + " product in your cart"){
-@for(product <- user.getProductsInCart){
-<pre data-line="@product.getId"><span class="line">@product.getId</span><span class="code"><a href="/product/@product.getProduct().getId()">@product.getProduct().getName()</a></span></pre> 	
-}}
-}
-@if(user.getProductsInCart.size() != 1) {
+
 @webshop.index("Your Cart", "You have " + user.getProductsInCart.size() + " products in your cart"){
+
 @for(product <- user.getProductsInCart){
-<pre data-line="@product.getId"><span class="line">@product.getId</span><span class="code"><a href="/product/@product.getProduct().getId()">@product.getProduct().getName()</a></span></pre> 	
-}}	
+<pre data-line="@product.getId"><span class="line">@product.getId</span><span class="code"><a href="/product/@product.getProduct().getId()">@product.getProduct().getName()</a><a href="@routes.CartCont.rmvFrCart(product.getProduct().getId())"><span class="right-button glyphicon glyphicon-trash"></span></a>	
+<span class ="qty2">
+<form method='POST' action='@routes.CartCont.addToCart(product.getProduct().getId)'>
+    <input type='text' name='quantity' value='@product.getQuantity()' min-value='1' class='qty' />
+    <input type='button' action='submit'/>
+    
+</form></span></span></pre>
 }
+<span class="pull-right">
+<form action="@routes.CartCont.placeOrder" method="POST">
+<button type="submit" class="btn btn-default btn-sm">Place Order</button>
+</form>
+</span>
+}	
+

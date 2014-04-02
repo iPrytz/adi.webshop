@@ -2,10 +2,17 @@
 
 
 
-@webshop.index("Product info", ""){
-Product <br>
-ID: @order.getId() <br>
+@webshop.index("Your Order", "Order ID: " + order.getId){
+
+@for(product <- order.getProducts()){
+<pre data-line="@product.getProduct().getId"><span class="line">@product.getProduct().getId</span><span class="code"><a href="/product/@product.getProduct().getId()">@product.getProduct().getName()</a><span class ="qty2">@product.getQuantity()</span></span></pre>	
+}
+
+
+Products: @order.getProducts().size()  <br>
+Order ID: @order.getId() <br>
 Date: @order.getDate() <br>
 Price: @order.getCost() <br>
+
  
 }

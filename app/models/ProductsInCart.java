@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+
 @Entity
 public class ProductsInCart {
 	@Id
@@ -45,5 +46,9 @@ public class ProductsInCart {
 
 	public Product getProduct() {
 		return product;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 }

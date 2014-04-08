@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.JoinColumn; 
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -21,16 +21,13 @@ public final class Product {
 	private final double cost;
 	private final double RRP;
 	@ManyToMany
-	@JoinTable(name="category_product",
-    joinColumns = @JoinColumn(name = "products_id"),
-    inverseJoinColumns = @JoinColumn(name = "category_id"))
+	@JoinTable(name = "category_product", joinColumns = @JoinColumn(name = "products_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private List<Category> categories;
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	private List<ProductsInCart> productsInCart;
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	private List<ProductsInOrder> productsInOrder;
 
-	
 	Product() {
 		this.id = 0;
 		this.name = "";
@@ -41,6 +38,7 @@ public final class Product {
 		this.productsInCart = null;
 		this.productsInOrder = null;
 	}
+
 	public Product(int id, String name, double cost, double RRP) {
 		this.id = id;
 		this.name = name;
@@ -52,6 +50,7 @@ public final class Product {
 		this.productsInOrder = null;
 
 	}
+
 	public Product(String name, String desc, double cost, double RRP) {
 		this.id = 0;
 		this.name = name;
@@ -117,6 +116,7 @@ public final class Product {
 	public double getCost() {
 		return cost;
 	}
+
 	public List<Category> getCategories() {
 		return categories;
 	}

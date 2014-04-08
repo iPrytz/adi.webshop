@@ -3,7 +3,7 @@
 @webshop.index("Your Orders", "Nr of orders: " + user.getOrders().size()){
 
 @for(order <- user.getOrders()){
-<pre data-line="@order.getId"><span class="line">@order.getId</span><span class="code"><a href="@routes.OrderCont.showOrderWithId(order.getId())">@order.getId()</a></span></pre>	
+<pre data-line="@order.getId"><span class="line">@order.getId</span><span class="code"><a href="@routes.OrderCont.showOrderWithId(order.getId())">@order.getDate()</a></span></pre>	
 }
 
 

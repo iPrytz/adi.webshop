@@ -6,7 +6,7 @@
 @webshop.index("Your Order", "Order ID: " + order.getId){
 
 @for(product <- order.getProducts()){
-<pre data-line="@product.getProduct().getId"><span class="line">@product.getProduct().getId</span><span class="code"><a href="/product/@product.getProduct().getId()">@product.getProduct().getName()</a><span class ="qty2">@product.getQuantity()</span></span></pre>	
+<pre data-line="@product.getProduct().getId"><span class="line">@product.getProduct().getId</span><span class="code"><a href="/product/@product.getProduct().getId()">@product.getProduct().getName()</a><span class ="qty2">Quantity: @product.getQuantity()</span></span></pre>	
 }
 
 

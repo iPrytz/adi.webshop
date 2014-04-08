@@ -15,18 +15,17 @@ public final class Category {
 	private String name;
 	private int staffId;
 	@ManyToMany
-//(mappedBy = "categories")
 	private List<Product> products;
+	public Category() {
+	}
 
-	public Category(){}
-	
-	public Category(String name, int staffId){
+	public Category(String name, int staffId) {
 		this.id = 0;
 		this.name = name;
 		this.staffId = staffId;
 		this.products = null;
 	}
-	
+
 	public Category(int id, String name, int staffId, List<Product> products) {
 		this.id = id;
 		this.name = name;

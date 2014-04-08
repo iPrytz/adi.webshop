@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +19,6 @@ public class ProductCont extends Controller {
 		List<Product> products = getAllProductsFromDb();
 		return ok(showAllProducts.render(products));
 	}
-
 	@Transactional
 	public static Result showProduct(int id) {
 		Product product = getProductFromDb(id);
@@ -47,20 +48,23 @@ public class ProductCont extends Controller {
 	@Security.Authenticated(MyAuthenticator.class)
 	public static Result addProduct() {
 		Map<String, String[]> form = request().body().asFormUrlEncoded();
-
 		String prodName = form.get("name")[0];
 		String priceS = form.get("price")[0];
 		String rrpS = form.get("rrp")[0];
 		String desc = form.get("desc")[0];
-
+		List<String> productCategoriesId = new ArrayList<String>();
+		Collections.addAll(productCategoriesId, form.get("category"));
+		List<Category> productCategories = new ArrayList<Category>();
+		for (String categoryId : productCategoriesId) {
+			productCategories.add(JPA.em().find(Category.class,
+					Integer.parseInt(categoryId)));
+		}
 		double price = Double.parseDouble(priceS);
 		double rrp = Double.parseDouble(rrpS);
-
-		JPA.em().persist(new Product(prodName, desc, price, rrp));
+		JPA.em().persist(
+				new Product(prodName, desc, price, rrp, productCategories));
 		flash().put("product", prodName);
-
 		List<Category> categories = CategoryCont.getCategoriesFromDB();
-		
 		return ok(addProducts.render(categories));
 	}
 
@@ -76,7 +80,6 @@ public class ProductCont extends Controller {
 	public static Result delProduct(int id) {
 		Product prod = JPA.em().find(Product.class, id);
 		JPA.em().remove(prod);
-
 		List<Product> products = getAllProductsFromDb();
 		return ok(delProducts.render(products));
 	}
@@ -93,5 +96,4 @@ public class ProductCont extends Controller {
 	private static Product getProductFromDb(int id) {
 		return JPA.em().find(Product.class, id);
 	}
-
 }

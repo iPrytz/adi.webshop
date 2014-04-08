@@ -1,11 +1,9 @@
 package models;
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
 
 @Entity
 public class ProductsInCart {
@@ -17,14 +15,14 @@ public class ProductsInCart {
 	private int quantity;
 	@ManyToOne
 	private Product product;
-	
-	public ProductsInCart(){
+
+	public ProductsInCart() {
 		this.id = 0;
 		this.user = null;
 		this.quantity = 0;
 		this.product = null;
 	}
-	
+
 	public ProductsInCart(User user, int quantity, Product product) {
 		this.id = 0;
 		this.user = user;

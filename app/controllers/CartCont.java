@@ -1,7 +1,7 @@
 package controllers;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -24,22 +24,18 @@ public class CartCont extends Controller {
 	@Transactional
 	public static Result showCarts() {
 		User user = UserCont.getUserFromSession();
-
 		if (user == null) {
 			return redirect(routes.UserCont.showLoginForm());
 		}
-
 		return ok(showCart.render(user));
 	}
 
 	@Transactional
 	public static Result showCart(int userId) {
 		User user = getUserFromDb(userId);
-
 		if (user == null) {
 			return notFound("No user found");
 		}
-
 		return ok(showCart.render(user));
 	}
 
@@ -48,17 +44,23 @@ public class CartCont extends Controller {
 		User user = UserCont.getUserFromSession();
 		Map<String, String[]> form = request().body().asFormUrlEncoded();
 		Product prod = JPA.em().find(Product.class, prodId);
-		int quantity;
-
+		int quantity = 1;
 		if (form != null) {
 			String qty = form.get("quantity")[0];
-			quantity = Integer.parseInt(qty);
+			try{
+				quantity = Integer.parseInt(qty);				
+			}catch(NumberFormatException o){
+				quantity = 1; 
+			}
+			finally{
+				if(quantity < 1){
+					quantity = 1;
+				}				
+			}
 		} else {
 			quantity = 1;
 		}
-
 		if (user != null) {
-
 			TypedQuery<ProductsInCart> query = JPA
 					.em()
 					.createQuery(
@@ -80,17 +82,13 @@ public class CartCont extends Controller {
 					flash().put("updated", productInCart.getProduct().getName());
 				}
 			} else {
-
 				ProductsInCart prodInCart = new ProductsInCart(user, quantity,
 						prod);
-
 				JPA.em().persist(prodInCart);
 			}
-
 		} else {
 			return redirect(routes.UserCont.showLoginForm());
 		}
-
 		return ok(showCart.render(user));
 	}
 
@@ -100,7 +98,7 @@ public class CartCont extends Controller {
 
 		if (user != null) {
 			Product prod = JPA.em().find(Product.class, prodId);
-			 List<ProductsInCart> prodInCart = user.getProductsInCart();
+			List<ProductsInCart> prodInCart = user.getProductsInCart();
 			if (prodInCart != null) {
 				for (ProductsInCart cartRecord : prodInCart) {
 					if (cartRecord.getProduct().getId() == prod.getId()) {
@@ -115,21 +113,30 @@ public class CartCont extends Controller {
 	}
 
 	@Transactional
-	public static Result placeOrder(){
+	public static Result placeOrder() {
 		User user = UserCont.getUserFromSession();
-		
+		double cost = 0.0;
 		List<ProductsInCart> userProductsInCart = user.getProductsInCart();
 		List<ProductsInOrder> userProductsInOrder = new ArrayList<ProductsInOrder>();
-		Date date = new Date(System.currentTimeMillis());	
-		Order order = new Order(user, date.toString(), 1000, 1000, userProductsInOrder);
-		
+
 		for (ProductsInCart productsInCart : userProductsInCart) {
-		userProductsInOrder.add(new ProductsInOrder(order, productsInCart.getQuantity(), productsInCart.getProduct()));	
-		JPA.em().remove(productsInCart);
+			cost = cost
+					+ (productsInCart.getProduct().getRRP() * (double) productsInCart
+							.getQuantity());
+		}
+
+		Date date = new Date(System.currentTimeMillis());
+		Order order = new Order(user, date, cost,
+				userProductsInOrder);
+
+		for (ProductsInCart productsInCart : userProductsInCart) {
+			userProductsInOrder.add(new ProductsInOrder(order, productsInCart
+					.getQuantity(), productsInCart.getProduct()));
+			JPA.em().remove(productsInCart);
 		}
 		order.setProducts(userProductsInOrder);
 		JPA.em().persist(order);
-		
+
 		return ok(showOrder.render(order));
 	}
 
@@ -138,5 +145,4 @@ public class CartCont extends Controller {
 		return JPA.em().find(User.class, userId);
 	}
 
-	
 }

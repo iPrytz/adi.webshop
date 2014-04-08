@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-
 public class TempCart {
 	@Id
 	@GeneratedValue
@@ -16,14 +15,14 @@ public class TempCart {
 	private int quantity;
 	@OneToMany
 	private List<Product> products = new ArrayList<Product>();
-	
-	public TempCart(){
+
+	public TempCart() {
 		this.id = 0;
 		this.sessionId = null;
 		this.quantity = 0;
 		this.products = null;
 	}
-	
+
 	public TempCart(String sessionId, int quantity, Product products) {
 		this.id = 0;
 		this.sessionId = sessionId;
@@ -47,6 +46,3 @@ public class TempCart {
 		return products;
 	}
 }
-
-	
-

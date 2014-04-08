@@ -12,7 +12,6 @@ public class OrderCont extends Controller {
 	@Transactional
 	public static Result showOrders() {
 		User user = UserCont.getUserFromSession();
-
 		if (user != null) {
 			if (user.getOrders() == null) {
 				return redirect(routes.CartCont.showCarts());
@@ -20,7 +19,6 @@ public class OrderCont extends Controller {
 		} else {
 			return redirect(routes.UserCont.showLoginForm());
 		}
-
 		return ok(showOrders.render(user));
 	}
 
@@ -30,18 +28,10 @@ public class OrderCont extends Controller {
 		if (order == null) {
 			return notFound("Order with Order ID: " + orderId + " not found!");
 		}
-
 		return ok(showOrder.render(order));
 	}
 
 	public static Result showOrder() {
-
 		return ok(showOrder.render(null));
 	}
-
-	// private static Order getOrderFromDb(int userId) {
-	//
-	// return null;
-	// }
-
 }

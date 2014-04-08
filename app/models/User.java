@@ -8,13 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-
 @Entity
 public final class User {
 	@Id
 	@GeneratedValue
 	private final int id;
-	@Column(unique=true)
+	@Column(unique = true)
 	private final String email;
 	private final String password;
 	private final String firstname;
@@ -23,9 +22,9 @@ public final class User {
 	private final String postcode;
 	private final String town;
 	private final String phonenumber;
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy = "user")
 	private List<ProductsInCart> productsInCart;
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy = "user")
 	private List<Order> orders;
 
 	public User() {
@@ -41,7 +40,7 @@ public final class User {
 		this.productsInCart = null;
 		this.orders = null;
 	}
-	
+
 	public User(String email, String password, String firstname,
 			String surname, String streetAddress, String postcode, String town,
 			String phonenumber) {
@@ -56,7 +55,6 @@ public final class User {
 		this.phonenumber = phonenumber;
 		this.orders = null;
 	}
-
 
 	public User(int id, String email, String password, String firstname,
 			String surname, String streetAddress, String postcode, String town,
@@ -108,11 +106,12 @@ public final class User {
 	public String getPhonenumber() {
 		return phonenumber;
 	}
-	
-	public List<ProductsInCart> getProductsInCart(){
+
+	public List<ProductsInCart> getProductsInCart() {
 		return productsInCart;
 	}
-	public void setProductsInCart(List<ProductsInCart> productsInCart){
+
+	public void setProductsInCart(List<ProductsInCart> productsInCart) {
 		this.productsInCart = productsInCart;
 	}
 

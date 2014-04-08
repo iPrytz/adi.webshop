@@ -15,21 +15,20 @@ public class ProductsInOrder {
 	private int quantity;
 	@ManyToOne
 	private Product product;
-	
-	public ProductsInOrder(){
+
+	public ProductsInOrder() {
 		this.id = 0;
 		this.order = null;
 		this.quantity = 0;
 		this.product = null;
 	}
-	
+
 	public ProductsInOrder(Order order, int quantity, Product product) {
 		this.id = 0;
 		this.order = order;
 		this.quantity = quantity;
 		this.product = product;
 	}
-	
 
 	public int getId() {
 		return id;

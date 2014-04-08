@@ -1,6 +1,9 @@
 package controllers;
 
 
+import java.util.List;
+
+import models.Category;
 import play.db.jpa.Transactional;
 import play.mvc.Security;
 import play.mvc.Controller;
@@ -11,22 +14,11 @@ import views.html.products.*;
 public class WebshopCont extends Controller {
 
     public static Result webshop() {
-//    	// Access the cache
-//    	News userNews = Cache.get(uuid+"item.key");
-//    	if(userNews==null) {
-//    		userNews = generateNews(uuid);
-//    		Cache.set(uuid+"item.key", userNews );
-//    	}
-
-//    	session("sessionID", "");
-
-    	
-//    	if ("".equals(session("sessonID"))||session("sessionID") == null){	
-//    	setSessoionUUID();
-//    	};
-    	
+   	
         return  ok(index.render("Expected Webshop with no Exception", "Welcome!", null));
     }
+   
+    @Transactional
     @Security.Authenticated(MyAuthenticator.class)
     public static Result admin(){
     	
@@ -34,22 +26,7 @@ public class WebshopCont extends Controller {
     		return redirect(routes.UserCont.showLoginForm()); 
     	}
     	
-    	return ok(addProducts.render(""));
-    }
-    
-    
-    
-@Transactional    
-public static void setSessoionUUID() {
-	
-	// Generate a unique ID
-	String uuid=session("sessionId");
-	if(uuid==null) {
-		uuid=java.util.UUID.randomUUID().toString();
-		session("sessionID", uuid);
-	}
-	
-		
-	}
-    
+    	List<Category> categories = CategoryCont.getCategoriesFromDB();
+    	return ok(addProducts.render(categories));
+    }   
 }

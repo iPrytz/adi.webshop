@@ -1,0 +1,74 @@
+@(param: Any)
+
+
+
+@webshop.index("Create new user", "Please enter your details:"){
+	
+
+	
+@if(flash.containsKey("username-empty")){
+	<div class="alert alert-danger">Input Email!</div>
+}
+@if(flash.containsKey("password-empty")){
+	<div class="alert alert-danger">Input Password!</div>
+}
+@if(flash.containsKey("firstname-empty")){
+	<div class="alert alert-danger">Input Firstname!</div>
+}
+@if(flash.containsKey("surname-empty")){
+	<div class="alert alert-danger">Input Surname!</div>
+}
+@if(flash.containsKey("streetaddress-empty")){
+	<div class="alert alert-danger">Input Street Address!</div>
+}
+@if(flash.containsKey("postcode-empty")){
+	<div class="alert alert-danger">Input Postcode!</div>
+}
+@if(flash.containsKey("town-empty")){
+	<div class="alert alert-danger">Input Town!</div>
+}
+@if(flash.containsKey("phonenumber-empty")){
+	<div class="alert alert-danger">Input Phonenumber!</div>
+}
+
+	
+<div id="login-form" class="center-block">
+<form class="form-horizontal" role="form" action="@routes.UserCont.createUser()" method="POST" >
+  <div class="form-group col-xs-3">
+    <label class="sr-only">Email address</label>
+    <input type="email" class="form-control" name="email" placeholder="Email">
+  </div>
+  <div class="form-group col-xs-3">
+    <label class="sr-only">Password</label>
+    <input type="text" class="form-control" name="password" placeholder="Password">
+  </div>
+  <div class="form-group col-xs-3">
+    <label class="sr-only">Firstname</label>
+    <input type="text" class="form-control" name="firstname" placeholder="Firtstname">
+  </div>
+  <div class="form-group col-xs-3">
+    <label class="sr-only">Surname</label>
+    <input type="text" class="form-control" name="surname" placeholder="Surname">
+  </div>
+  <div class="form-group col-xs-3">
+    <label class="sr-only">Street Address</label>
+    <input type="text" class="form-control" name="streetaddress" placeholder="Street Address">
+  </div>
+  <div class="form-group col-xs-3">
+    <label class="sr-only">Postcode</label>
+    <input type="text" class="form-control" name="postcode" placeholder="Postcode">
+  </div>
+  <div class="form-group col-xs-3">
+    <label class="sr-only">Town</label>
+    <input type="text" class="form-control" name="town" placeholder="Town">
+  </div>
+  <div class="form-group col-xs-3">
+    <label class="sr-only">Phonenumber</label>
+    <input type="phonenumber" class="form-control" name="phonenumber" placeholder="Phonenumber">
+  </div>
+ 
+  <button type="submit" class="btn btn-default">Create</button>
+</form>
+
+</div>
+}

@@ -69,7 +69,7 @@ public class CategoryCont extends Controller {
 		return ok(delCategories.render(getCategoriesFromDB()));
 	}
 	@Transactional
-	private static List<Category> getCategoriesFromDB() {
+	public static List<Category> getCategoriesFromDB() {
 		List<Category> categories = JPA.em()
 				.createQuery("SELECT c FROM Category AS c", Category.class)
 				.getResultList();

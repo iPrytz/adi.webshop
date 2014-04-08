@@ -11,7 +11,7 @@
 
  @for(category <- categories){
  	
-<pre data-line="@category.getId"><span class="line">@category.getId</span><span class="code"><a href ="@routes.CategoryCont.showCategories/@category.getName()">@category.getName()</a></span><a href="@routes.CategoryCont.delCategory(category.getId())"><span class="right-button glyphicon glyphicon-trash"></span></a></pre> 	
+<pre data-line="@category.getId"><span class="line">@category.getId</span><span class="code"><a href ="@routes.CategoryCont.showCategories/@category.getName()">@category.getName()</a><a href="@routes.CategoryCont.delCategory(category.getId())"><span class="right-button glyphicon glyphicon-trash"></span></a></span></pre> 	
 
  }}
 

@@ -95,7 +95,7 @@ public class CartCont extends Controller {
 	}
 
 	@Transactional
-	public static Result rmvFrCart(int prodId) {
+	public static Result removeFromCart(int prodId) {
 		User user = UserCont.getUserFromSession();
 
 		if (user != null) {

@@ -3,7 +3,6 @@ package controllers;
 import java.util.List;
 import java.util.Map;
 
-
 import play.db.jpa.JPA;
 import play.db.jpa.Transactional;
 import play.mvc.Controller;
@@ -37,9 +36,11 @@ public class ProductCont extends Controller {
 		return ok(showProductsInCategory.render(categories.get(0)));
 	}
 
+	@Transactional
 	@Security.Authenticated(MyAuthenticator.class)
 	public static Result addProducts() {
-		return ok(addProducts.render(""));
+		List<Category> categories = CategoryCont.getCategoriesFromDB();
+		return ok(addProducts.render(categories));
 	}
 
 	@Transactional
@@ -58,7 +59,9 @@ public class ProductCont extends Controller {
 		JPA.em().persist(new Product(prodName, desc, price, rrp));
 		flash().put("product", prodName);
 
-		return ok(addProducts.render(prodName));
+		List<Category> categories = CategoryCont.getCategoriesFromDB();
+		
+		return ok(addProducts.render(categories));
 	}
 
 	@Transactional

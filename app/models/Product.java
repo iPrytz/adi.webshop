@@ -27,6 +27,8 @@ public final class Product {
 	private List<Category> categories;
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	private List<ProductsInCart> productsInCart;
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	private List<ProductsInOrder> productsInOrder;
 
 	
 	Product() {
@@ -37,6 +39,7 @@ public final class Product {
 		this.RRP = 0;
 		this.categories = null;
 		this.productsInCart = null;
+		this.productsInOrder = null;
 	}
 	public Product(int id, String name, double cost, double RRP) {
 		this.id = id;
@@ -46,6 +49,8 @@ public final class Product {
 		this.RRP = RRP;
 		this.categories = null;
 		this.productsInCart = null;
+		this.productsInOrder = null;
+
 	}
 	public Product(String name, String desc, double cost, double RRP) {
 		this.id = 0;
@@ -55,6 +60,8 @@ public final class Product {
 		this.RRP = RRP;
 		this.categories = null;
 		this.productsInCart = null;
+		this.productsInOrder = null;
+
 	}
 
 	public Product(int id, String name, String description, double cost,
@@ -66,6 +73,8 @@ public final class Product {
 		this.RRP = RRP;
 		this.categories = categories;
 		this.productsInCart = null;
+		this.productsInOrder = null;
+
 	}
 
 	public Product(String name, String description, double cost, double RRP,
@@ -77,6 +86,8 @@ public final class Product {
 		this.RRP = RRP;
 		this.categories = categories;
 		this.productsInCart = null;
+		this.productsInOrder = null;
+
 	}
 
 	@Override

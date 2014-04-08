@@ -1,4 +1,5 @@
 @(order: models.Order)
+@import java.math.BigInteger; var quantity=0;
 
 
 
@@ -9,10 +10,14 @@
 }
 
 
-Products: @order.getProducts().size()  <br>
-Order ID: @order.getId() <br>
-Date: @order.getDate() <br>
-Price: @order.getCost() <br>
+@for(product <- order.getProducts()){
+	@{quantity = quantity + product.getQuantity()}
+}
+
+Nr of Products: @quantity  <br>
+This Order ID: @order.getId() <br>
+Date of this Order: @order.getDate() <br>
+Total Price: @order.getCost() <br>
 
  
 }

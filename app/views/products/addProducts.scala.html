@@ -1,4 +1,4 @@
-@(param: Any)
+@(categories: List[Category])
 
 @webshop.admin("Add Product"){
 
@@ -31,6 +31,16 @@
     <label class="sr-only">Description</label>
     <textarea type="text" class="form-control" name="desc" placeholder="Description"></textarea>
   </div>
+  
+  @for(category <- categories){
+  	
+  <div class="checkbox">
+    <label>
+      <input name="@category.getId" type="checkbox"> @category.getName()
+    </label>
+  </div>
+  	  	
+  }
  
   <button type="submit" class="btn btn-default">Submit</button>
 </form>

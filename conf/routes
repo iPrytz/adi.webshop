@@ -27,7 +27,6 @@ GET     /order/:id                 	controllers.OrderCont.showOrderWithId(id:Int
 GET     /category                 	controllers.CategoryCont.showCategories()
 GET     /category/:category       	controllers.ProductCont.showProductsInCategory(category)
 GET     /cart                      	controllers.CartCont.showCarts()
-#GET     /cart/:id                   controllers.CartCont.showCart(id:Int)
 POST 	/add-to-cart/:id			controllers.CartCont.addToCart(id:Int)
 GET 	/add-to-cart/:id			controllers.CartCont.addToCart(id:Int)
 GET 	/remove-from-cart/:id		controllers.CartCont.removeFromCart(id:Int)

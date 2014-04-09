@@ -30,14 +30,6 @@ public class CartCont extends Controller {
 		return ok(showCart.render(user));
 	}
 
-//	@Transactional
-//	public static Result showCart(int userId) {
-//		User user = getUserFromDb(userId);
-//		if (user == null) {
-//			return notFound("No user found");
-//		}
-//		return ok(showCart.render(user));
-//	}
 
 	@Transactional
 	public static Result addToCart(int prodId) {
@@ -90,7 +82,6 @@ public class CartCont extends Controller {
 			return redirect(routes.UserCont.showLoginForm());
 		}
 		return redirect(routes.CartCont.showCarts());
-//		return ok(showCart.render(user));
 	}
 
 	@Transactional
@@ -144,7 +135,6 @@ public class CartCont extends Controller {
 		JPA.em().persist(order);
 
 		return ok(showOrder.render(order));
-//		return redirect(routes.OrderCont.showOrder());
 	}
 
 	@Transactional

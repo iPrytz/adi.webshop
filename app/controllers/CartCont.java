@@ -30,14 +30,14 @@ public class CartCont extends Controller {
 		return ok(showCart.render(user));
 	}
 
-	@Transactional
-	public static Result showCart(int userId) {
-		User user = getUserFromDb(userId);
-		if (user == null) {
-			return notFound("No user found");
-		}
-		return ok(showCart.render(user));
-	}
+//	@Transactional
+//	public static Result showCart(int userId) {
+//		User user = getUserFromDb(userId);
+//		if (user == null) {
+//			return notFound("No user found");
+//		}
+//		return ok(showCart.render(user));
+//	}
 
 	@Transactional
 	public static Result addToCart(int prodId) {
@@ -89,7 +89,8 @@ public class CartCont extends Controller {
 		} else {
 			return redirect(routes.UserCont.showLoginForm());
 		}
-		return ok(showCart.render(user));
+		return redirect(routes.CartCont.showCarts());
+//		return ok(showCart.render(user));
 	}
 
 	@Transactional
@@ -115,10 +116,15 @@ public class CartCont extends Controller {
 	@Transactional
 	public static Result placeOrder() {
 		User user = UserCont.getUserFromSession();
+		
+		if(user.getProductsInCart().isEmpty()){
+			return redirect(routes.CartCont.showCarts());
+		}
+		
 		double cost = 0.0;
 		List<ProductsInCart> userProductsInCart = user.getProductsInCart();
 		List<ProductsInOrder> userProductsInOrder = new ArrayList<ProductsInOrder>();
-
+		
 		for (ProductsInCart productsInCart : userProductsInCart) {
 			cost = cost
 					+ (productsInCart.getProduct().getRRP() * (double) productsInCart
@@ -138,6 +144,7 @@ public class CartCont extends Controller {
 		JPA.em().persist(order);
 
 		return ok(showOrder.render(order));
+//		return redirect(routes.OrderCont.showOrder());
 	}
 
 	@Transactional

@@ -24,7 +24,7 @@
 <a href="@routes.OrderCont.showOrders">Order</a>
 
 @if(session().get("username") != null){
-	<span class="pull-right">@session().get("username") </span> 
+	<a href="@routes.UserCont.showUser"><span class="pull-right">@session().get("username") </span> </a>
 }
 
 

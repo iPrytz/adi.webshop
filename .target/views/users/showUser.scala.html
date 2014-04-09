@@ -1,0 +1,16 @@
+@(user: models.User)
+
+
+
+@webshop.index("User details", user.getFirstname() + " " + user.getSurname()){
+	
+<pre data-line="0"><span class="line-user">E-mail</span><span class="code-user">@user.getEmail()</span></pre> 	
+<pre data-line="1"><span class="line-user">Firstname</span><span class="code-user">@user.getFirstname</span></pre> 	
+<pre data-line="2"><span class="line-user">Surname</span><span class="code-user">@user.getSurname</span></pre> 	
+<pre data-line="3"><span class="line-user">Street Adr.</span><span class="code-user">@user.getStreetAddress()</span></pre> 	
+<pre data-line="4"><span class="line-user">Postcode</span><span class="code-user">@user.getPostcode()</span></pre> 	
+<pre data-line="5"><span class="line-user">Town</span><span class="code-user">@user.getTown</span></pre> 	
+<pre data-line="6"><span class="line-user">PhoneNr</span><span class="code-user">@user.getPhonenumber()</span></pre> 	
+
+}
+

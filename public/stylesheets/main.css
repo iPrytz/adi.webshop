@@ -111,6 +111,16 @@ pre span.line {
 	text-shadow: 1px 1px 1px rgba(255, 255, 255, .5);
 	font-weight: bold;
 }
+pre span.line-user {
+	text-align: right;
+	display: inline-block;
+	padding: 5px 5px;
+	width: 120px;
+	background: #D6D6D6;
+	color: #8B8B8B;
+	text-shadow: 1px 1px 1px rgba(255, 255, 255, .5);
+	font-weight: bold;
+}
 
 pre span.infoTag {
 	text-align: right;
@@ -128,6 +138,12 @@ pre span.code {
 	position: absolute;
 	right: 0;
 	left: 40px;
+}
+pre span.code-user {
+	padding: 5px 5px;
+	position: absolute;
+	right: 0;
+	left: 140px;
 }
 
 pre span.info {

@@ -17,7 +17,7 @@ public final class User {
 	private final String email;
 	private final String password;
 	private final String firstname;
-	private final String description;
+	private final String surname;
 	private final String streetAddress;
 	private final String postcode;
 	private final String town;
@@ -32,7 +32,7 @@ public final class User {
 		this.email = null;
 		this.password = null;
 		this.firstname = null;
-		this.description = null;
+		this.surname = null;
 		this.streetAddress = null;
 		this.postcode = null;
 		this.town = null;
@@ -48,7 +48,7 @@ public final class User {
 		this.email = email;
 		this.password = password;
 		this.firstname = firstname;
-		this.description = description;
+		this.surname = description;
 		this.streetAddress = streetAddress;
 		this.postcode = postcode;
 		this.town = town;
@@ -63,7 +63,7 @@ public final class User {
 		this.email = email;
 		this.password = password;
 		this.firstname = firstname;
-		this.description = description;
+		this.surname = description;
 		this.streetAddress = streetAddress;
 		this.postcode = postcode;
 		this.town = town;
@@ -87,8 +87,8 @@ public final class User {
 		return firstname;
 	}
 
-	public String getdescription() {
-		return description;
+	public String getSurname() {
+		return surname;
 	}
 
 	public String getStreetAddress() {
@@ -127,7 +127,7 @@ public final class User {
 		String string;
 		string = "Email / Username: " + getEmail() + "\nPassword: "
 				+ getPassword() + "\nName: " + getFirstname() + " "
-				+ getdescription() + "\nAddress: " + getStreetAddress() + " "
+				+ getSurname() + "\nAddress: " + getStreetAddress() + " "
 				+ getPostcode() + " " + getTown() + "\nPhonenumber: "
 				+ getPhonenumber() + "\n";
 		return string;

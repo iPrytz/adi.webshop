@@ -26,9 +26,16 @@ public class OrderCont extends Controller {
 	public static Result showOrderWithId(int orderId) {
 		Order order = JPA.em().find(Order.class, orderId);
 		if (order == null) {
-			return notFound("Order with Order ID: " + orderId + " not found!");
+			return redirect(routes.CartCont.showCarts());		
 		}
-		return ok(showOrder.render(order));
+		
+		User user = UserCont.getUserFromSession();
+		for(Order userOrder :user.getOrders()){
+			if(userOrder.getId() == orderId){
+				return ok(showOrder.render(order));				
+			}
+		}
+		return redirect(routes.CartCont.showCarts());		
 	}
 
 	public static Result showOrder() {

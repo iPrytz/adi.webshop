@@ -62,14 +62,14 @@ public class UserCont extends Controller {
 			return redirect(routes.UserCont.showLoginForm());
 		}
 	}
-	
+
 	@Transactional
 	public static Result createUser() {
 		Map<String, String[]> form = request().body().asFormUrlEncoded();
 		String email = form.get("email")[0];
 		String password = form.get("password")[0];
 		String firstname = form.get("firstname")[0];
-		String description = form.get("description")[0];
+		String description = form.get("surname")[0];
 		String streetAddress = form.get("streetaddress")[0];
 		String postcode = form.get("postcode")[0];
 		String town = form.get("town")[0];
@@ -77,13 +77,13 @@ public class UserCont extends Controller {
 		boolean emailIsEmpty = "".equals(email);
 		boolean passwordIsEmpty = "".equals(password);
 		boolean firstnameIsEmpty = "".equals(firstname);
-		boolean descriptionIsEmpty = "".equals(description);
+		boolean surnameIsEmpty = "".equals(description);
 		boolean streetAddressIsEmpty = "".equals(streetAddress);
 		boolean postcodeIsEmpty = "".equals(postcode);
 		boolean townIsEmpty = "".equals(town);
 		boolean phonenumberIsEmpty = "".equals(phonenumber);
 		if (emailIsEmpty || passwordIsEmpty || firstnameIsEmpty
-				|| descriptionIsEmpty || streetAddressIsEmpty || postcodeIsEmpty
+				|| surnameIsEmpty || streetAddressIsEmpty || postcodeIsEmpty
 				|| townIsEmpty || phonenumberIsEmpty) {
 			if (emailIsEmpty) {
 				flash().put("username-empty", "yes");
@@ -94,8 +94,8 @@ public class UserCont extends Controller {
 			if (firstnameIsEmpty) {
 				flash().put("firstname-empty", "yes");
 			}
-			if (descriptionIsEmpty) {
-				flash().put("description-empty", "yes");
+			if (surnameIsEmpty) {
+				flash().put("surname-empty", "yes");
 			}
 			if (streetAddressIsEmpty) {
 				flash().put("streetaddress-empty", "yes");
@@ -117,6 +117,11 @@ public class UserCont extends Controller {
 			return redirect(routes.WebshopCont.webshop());
 		}
 		return redirect(routes.UserCont.showCreateUserForm());
+	}
+
+	@Transactional
+	public static Result showUser() {
+		return ok(showUser.render(getUserFromSession()));
 	}
 
 	@Transactional

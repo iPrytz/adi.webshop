@@ -17,7 +17,7 @@ public final class User {
 	private final String email;
 	private final String password;
 	private final String firstname;
-	private final String surname;
+	private final String description;
 	private final String streetAddress;
 	private final String postcode;
 	private final String town;
@@ -32,7 +32,7 @@ public final class User {
 		this.email = null;
 		this.password = null;
 		this.firstname = null;
-		this.surname = null;
+		this.description = null;
 		this.streetAddress = null;
 		this.postcode = null;
 		this.town = null;
@@ -42,13 +42,13 @@ public final class User {
 	}
 
 	public User(String email, String password, String firstname,
-			String surname, String streetAddress, String postcode, String town,
+			String description, String streetAddress, String postcode, String town,
 			String phonenumber) {
 		this.id = 0;
 		this.email = email;
 		this.password = password;
 		this.firstname = firstname;
-		this.surname = surname;
+		this.description = description;
 		this.streetAddress = streetAddress;
 		this.postcode = postcode;
 		this.town = town;
@@ -57,13 +57,13 @@ public final class User {
 	}
 
 	public User(int id, String email, String password, String firstname,
-			String surname, String streetAddress, String postcode, String town,
+			String description, String streetAddress, String postcode, String town,
 			String phonenumber, List<Order> order) {
 		this.id = id;
 		this.email = email;
 		this.password = password;
 		this.firstname = firstname;
-		this.surname = surname;
+		this.description = description;
 		this.streetAddress = streetAddress;
 		this.postcode = postcode;
 		this.town = town;
@@ -87,8 +87,8 @@ public final class User {
 		return firstname;
 	}
 
-	public String getSurname() {
-		return surname;
+	public String getdescription() {
+		return description;
 	}
 
 	public String getStreetAddress() {
@@ -127,7 +127,7 @@ public final class User {
 		String string;
 		string = "Email / Username: " + getEmail() + "\nPassword: "
 				+ getPassword() + "\nName: " + getFirstname() + " "
-				+ getSurname() + "\nAddress: " + getStreetAddress() + " "
+				+ getdescription() + "\nAddress: " + getStreetAddress() + " "
 				+ getPostcode() + " " + getTown() + "\nPhonenumber: "
 				+ getPhonenumber() + "\n";
 		return string;

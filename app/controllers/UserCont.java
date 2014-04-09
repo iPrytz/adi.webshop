@@ -69,7 +69,7 @@ public class UserCont extends Controller {
 		String email = form.get("email")[0];
 		String password = form.get("password")[0];
 		String firstname = form.get("firstname")[0];
-		String surname = form.get("surname")[0];
+		String description = form.get("description")[0];
 		String streetAddress = form.get("streetaddress")[0];
 		String postcode = form.get("postcode")[0];
 		String town = form.get("town")[0];
@@ -77,13 +77,13 @@ public class UserCont extends Controller {
 		boolean emailIsEmpty = "".equals(email);
 		boolean passwordIsEmpty = "".equals(password);
 		boolean firstnameIsEmpty = "".equals(firstname);
-		boolean surnameIsEmpty = "".equals(surname);
+		boolean descriptionIsEmpty = "".equals(description);
 		boolean streetAddressIsEmpty = "".equals(streetAddress);
 		boolean postcodeIsEmpty = "".equals(postcode);
 		boolean townIsEmpty = "".equals(town);
 		boolean phonenumberIsEmpty = "".equals(phonenumber);
 		if (emailIsEmpty || passwordIsEmpty || firstnameIsEmpty
-				|| surnameIsEmpty || streetAddressIsEmpty || postcodeIsEmpty
+				|| descriptionIsEmpty || streetAddressIsEmpty || postcodeIsEmpty
 				|| townIsEmpty || phonenumberIsEmpty) {
 			if (emailIsEmpty) {
 				flash().put("username-empty", "yes");
@@ -94,8 +94,8 @@ public class UserCont extends Controller {
 			if (firstnameIsEmpty) {
 				flash().put("firstname-empty", "yes");
 			}
-			if (surnameIsEmpty) {
-				flash().put("surname-empty", "yes");
+			if (descriptionIsEmpty) {
+				flash().put("description-empty", "yes");
 			}
 			if (streetAddressIsEmpty) {
 				flash().put("streetaddress-empty", "yes");
@@ -110,7 +110,7 @@ public class UserCont extends Controller {
 				flash().put("phonenumber-empty", "yes");
 			}
 		} else {
-			User user = new User(email, password, firstname, surname,
+			User user = new User(email, password, firstname, description,
 					streetAddress, postcode, town, phonenumber);
 			JPA.em().persist(user);
 			session().put("username", email);
